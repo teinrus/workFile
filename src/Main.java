@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Main {
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
 // создание статического массива
         List<String> products = List.of("Хлеб", "Яблоки", "Молоко");
         List<Integer> prices = List.of(100, 200, 300);
@@ -54,8 +54,7 @@ public class Main {
 
             }
             if ("load".equals(input)) {
-                baske.loadFromTxtFile(new File("test.txt"));
-                System.out.println(baske);
+                Basket.loadFromBinFile(new File("basket.bin"));
                 System.out.println("Успешно загружены ");
                 continue;
             }
@@ -65,7 +64,8 @@ public class Main {
 
 //Стоимость продукта
                 baske.addToCart(productNumber, productCount);
-                baske.saveTxt(new File("test.txt"));
+
+            baske.saveBin(new File("basket.bin"));
             }
 
 
