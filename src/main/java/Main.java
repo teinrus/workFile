@@ -1,3 +1,6 @@
+import main.java.Basket;
+import main.java.ClientLog;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -15,9 +18,10 @@ public class Main {
         Basket baske = new Basket(products, prices);
         System.out.println(baske);
 
-
+        Basket.loadFromTxtFile(new File("basket.json"));
 // переменные
         int sumProducts = 0;
+
 // создаем сканер
 
         Scanner scan = new Scanner(System.in);
@@ -53,7 +57,7 @@ public class Main {
 
             }
             if ("load".equals(input)) {
-                baske.loadFromTxtFile(new File("test.txt"));
+                baske.loadFromTxtFile(new File("basket.json"));
                 System.out.println(baske);
                 System.out.println("Успешно загружены ");
                 continue;
@@ -64,7 +68,7 @@ public class Main {
             clientLog.log(productNumber,productCount);
 //Стоимость продукта
             baske.addToCart(productNumber, productCount);
-            baske.saveTxt(new File("test.txt"));
+            baske.saveTxt(new File("basket.json"));
         }
 
 
