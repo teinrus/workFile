@@ -68,10 +68,10 @@ public class Main {
 
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
-                    System.out.println("Load enabled : " +
-                            eElement.getElementsByTagName("enabled").item(0).getTextContent());
-                    System.out.println("fileName  : " +
-                            eElement.getElementsByTagName("fileName").item(0).getTextContent());
+                    logCon = Boolean.valueOf(eElement.getElementsByTagName("enabled")
+                            .item(0).getTextContent());
+                    fileNameLog = eElement.getElementsByTagName("fileName")
+                            .item(0).getTextContent();
 
                 }
             }
