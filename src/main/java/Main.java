@@ -1,5 +1,4 @@
-import main.java.Basket;
-import main.java.ClientLog;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -58,8 +57,6 @@ public class Main {
             }
             if ("load".equals(input)) {
                 baske.loadFromTxtFile(new File("basket.json"));
-                System.out.println(baske);
-                System.out.println("Успешно загружены ");
                 continue;
             }
             String[] pars = input.split(" ");

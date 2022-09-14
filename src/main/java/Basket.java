@@ -1,7 +1,8 @@
-package main.java;
+
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
 import java.util.HashMap;
@@ -10,9 +11,9 @@ import java.util.Map;
 
 public class Basket {
 
-    private static List<String> products;
-    private static List<Integer> prices;
-    private static Map<Integer, Integer> totalPrice = new HashMap<>();
+    private  List<String> products;
+    private  List<Integer> prices;
+    private  Map<Integer, Integer> totalPrice = new HashMap<>();
 
     public Basket(List<String> products, List<Integer> prices) {
         this.products = products;
@@ -43,25 +44,26 @@ public class Basket {
     public void saveTxt(File textFile) {
         try (Writer writer= new FileWriter(textFile)){
             Gson gson = new Gson();
-            gson.toJson(new Basket(products, prices),writer );
-
+            Basket temp = new Basket(products, prices);
+            temp.totalPrice=this.totalPrice;
+            gson.toJson(temp,writer );
             System.out.println("Данные сохранены");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static Basket loadFromTxtFile(File textFile) throws RuntimeException {
-    try (Writer writer= new FileWriter(textFile)){
+    public static void  loadFromTxtFile(File textFile) throws RuntimeException {
+    try (Reader reader = new FileReader(textFile)) {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
-        Basket temp = gson.fromJson(String.valueOf(textFile), Basket.class);
+        Basket temp = gson.fromJson(reader,Basket.class);
         System.out.println(temp);
         System.out.println("Данные загружены");
     } catch (Exception e) {
-        System.out.println("Ошибка");
+        System.out.println("Файл не найден");;
     }
-        return null;
+
     }
 
     public List<String> getProducts() {
