@@ -10,7 +10,7 @@ public class Main {
 // создание статического массива
         List<String> products = List.of("Хлеб", "Яблоки", "Молоко");
         List<Integer> prices = List.of(100, 200, 300);
-
+        ClientLog clientLog = new ClientLog();
 
         Basket baske = new Basket(products, prices);
         System.out.println(baske);
@@ -47,6 +47,7 @@ public class Main {
                 // Вывод на печать
                 baske.printCart();
                 System.out.println("Итого: " + sumProducts + " руб");
+                clientLog.exportAsCSV(new File("log.csv"));
                 break;
 
 
@@ -60,7 +61,7 @@ public class Main {
             String[] pars = input.split(" ");
             int productNumber = Integer.parseInt(pars[0]) - 1;
             int productCount = Integer.parseInt(pars[1]);
-
+            clientLog.log(productNumber,productCount);
 //Стоимость продукта
             baske.addToCart(productNumber, productCount);
             baske.saveTxt(new File("test.txt"));
